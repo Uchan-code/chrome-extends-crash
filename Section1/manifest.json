@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "section1",
+  "version": "1.0.0",
+  "description": "テストしてます",
+  "icons": {
+    "32": "images/BOX.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "css/style.css"
+      ],
+      "js": [
+        "scripts/content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "images/BOX.png"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "extention_ids": [
+        "test"
+      ]
+    }
+  ]
+}
