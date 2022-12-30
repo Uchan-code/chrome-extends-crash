@@ -1,2 +1,1 @@
-import React from "react";
-const test = React.createElement("p", null, "Hello Worlds!");
+var test = 'hello';
