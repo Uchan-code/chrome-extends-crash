@@ -15,6 +15,14 @@ module.exports = {
                 use: "ts-loader",
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
+            },
+            {
+                use: ["style-loader", "css-loader"],
+                test: /\.css$/i,
+            },
+            {
+                type: "asset/resource",
+                test: /\.(jpg|jpeg|png|woff|woff2|eot|ttf|svg)$/,
             }
         ]
     },
@@ -42,6 +50,11 @@ module.exports = {
     output: {
         filename: "[name].js",
         path: path.resolve(__dirname, "dist")
+    },
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+        }
     }
 }
 
