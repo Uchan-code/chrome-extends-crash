@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import './popup.css'
+import WeatherCard from './WeatherCard/WeatherCard'
 
 const App: React.FC<{}> = () => {
+
+
+
   return (
     <div>
-      <img src="icon.png" />
+      <WeatherCard city="Tokyo" />
     </div>
   )
 }
