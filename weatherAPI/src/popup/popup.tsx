@@ -5,7 +5,13 @@ import { Add as AddIcon } from "@material-ui/icons"
 import "fontsource-roboto"
 import './popup.css'
 import WeatherCard from './WeatherCard/WeatherCard'
-import { setStoragedCities, getStoredCities, setStoredOptions, LocalStorageOptions, getStoredOptions } from '../utills/storage'
+import {
+  setStoragedCities,
+  getStoredCities,
+  setStoredOptions,
+  LocalStorageOptions,
+  getStoredOptions
+} from '../utills/storage'
 
 const App: React.FC<{}> = () => {
   const [cities, setCities] = useState<string[]>([])
@@ -38,16 +44,26 @@ const App: React.FC<{}> = () => {
       })
   }
 
+  const handleTempScaleButtonClick = () => {
+    const updateOptions: LocalStorageOptions = {
+      ...options,
+      tempScale: options.tempScale == "metric" ? "imperial" : "metric",
+    }
+    setStoredOptions(updateOptions).then(() => {
+      setOptions(updateOptions)
+    })
+  }
+
   if (!options) {
     return null
   }
 
   return (
     <Box mx="8px" my="16px">
-      <Grid container>
+      <Grid container justifyContent='space-evenly'>
         <Grid item>
           <Paper>
-            <Box px='15px' py="5px">
+            <Box px='20px' py="6px">
               <InputBase
                 placeholder='Add a city name'
                 value={cityInput}
@@ -58,11 +74,21 @@ const App: React.FC<{}> = () => {
             </Box>
           </Paper>
         </Grid>
+        <Grid item>
+          <Paper>
+            <Box>
+              <IconButton onClick={handleTempScaleButtonClick}>
+                {options.tempScale == "metric" ? "\u2103" : "\u2109"}
+              </IconButton>
+            </Box>
+          </Paper>
+        </Grid>
       </Grid>
       {
         cities.map((city, index) => (
           <WeatherCard
             city={city}
+            tempScale={options.tempScale}
             key={index}
             onDelete={() => handleCityDeleteButtonClick(index)} />))
       }
