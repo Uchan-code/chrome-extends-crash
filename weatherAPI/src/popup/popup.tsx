@@ -85,6 +85,10 @@ const App: React.FC<{}> = () => {
         </Grid>
       </Grid>
       {
+        options.homeCity != "" &&
+        <WeatherCard city={options.homeCity} tempScale={options.tempScale} />
+      }
+      {
         cities.map((city, index) => (
           <WeatherCard
             city={city}
