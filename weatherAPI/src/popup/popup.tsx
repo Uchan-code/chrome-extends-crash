@@ -4,7 +4,7 @@ import { Grid, Box, InputBase, IconButton, Paper } from '@material-ui/core'
 import { Add as AddIcon } from "@material-ui/icons"
 import "fontsource-roboto"
 import './popup.css'
-import WeatherCard from './WeatherCard/WeatherCard'
+import WeatherCard from '../components/WeatherCard/WeatherCard'
 import {
   setStoragedCities,
   getStoredCities,
