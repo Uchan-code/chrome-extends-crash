@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Button, Card, CardActions, CardContent, Typography } from '@material-ui/core'
-import { fetchOpenWeatherData, OpenWeatherData, OpenWeatherTempScale } from '../../utills/api'
+import { Box, Button, Card, Grid, CardActions, CardContent, Typography } from '@material-ui/core'
+import { fetchOpenWeatherData, OpenWeatherData, OpenWeatherTempScale, getWeatherIconSrc } from '../../utills/api'
 import "./WeatherCard.css"
 
 const WeatherCardContainer: React.FC<{
@@ -55,11 +55,27 @@ const WeatherCard: React.FC<{
 
     return (
         <WeatherCardContainer onDelete={onDelete}>
-            <Typography className='weatherCard-title'>{weatherData.name}</Typography>
-            <Typography className='weatherCard-body'>{Math.round(weatherData.main.temp)}</Typography>
-            <Typography className='weatherCard-body'>
-                Feels like: {Math.round(weatherData.main.feels_like)}
-            </Typography>
+            <Grid container justifyContent='space-around'>
+                <Grid item>
+                    <Typography className='weatherCard-title'>{weatherData.name}</Typography>
+                    <Typography className='weatherCard-temp'>{Math.round(weatherData.main.temp)}</Typography>
+                    <Typography className='weatherCard-body'>
+                        Feels like: {Math.round(weatherData.main.feels_like)}
+                    </Typography>
+                </Grid>
+                <Grid>
+                    {
+                        weatherData.weather.length > 0 && (
+                            <>
+                                <img src={getWeatherIconSrc(weatherData.weather[0].icon)} />
+                                <Typography className="weatherCard-body">
+                                    {weatherData.weather[0].main}
+                                </Typography>
+                            </>
+                        )
+                    }
+                </Grid>
+            </Grid>
         </WeatherCardContainer>
     )
 }
